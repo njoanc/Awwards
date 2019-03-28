@@ -51,7 +51,7 @@ INSTALLED_APPS = [
     # 'tribune.news',
     'registration',
     'tinymce',
-    'rest_framework',
+    'rest_framework.authtoken',
 
 ]
 
