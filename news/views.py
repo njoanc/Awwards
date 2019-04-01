@@ -11,7 +11,7 @@ from .forms import NewsLetterForm
 from rest_framework import generics
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from .serializers import ProjectSerializer, ProfileSerializer
+from .serializer import ProjectSerializer, ProfileSerializer
 from rest_framework import status
 from .permissions import IsAdminOrReadOnly
 
