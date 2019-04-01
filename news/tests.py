@@ -1,78 +1,153 @@
+# -*- coding: utf-8 -*-
+from __future__ import unicode_literals
+
 from django.test import TestCase
-from .models import Article,tags,Editor
-import datetime as dt
 
 # Create your tests here.
-class EditorTest(TestCase):
+from django.test import TestCase
+
+# Create your tests here.
+from .models import Location, tags, Image, Review, User, Profile
+from django.core.files.uploadedfile import SimpleUploadedFile
+
+
+class tagsTestClass(TestCase):
+
+    # Set up method the test for location and instantiating the location object
+
     def setUp(self):
-        self.new_editor = Editor(first_name='Jeanne',last_name='Nyiramwiza',email='njoanc@gmail.com')
-        self.new_editors = Editor(first_name='Jeanne',last_name='Nyiramwiza',email='njoanc@gmail.com')
-       
-        
+        self.test_tags = tags(name='funny')
+        self.test_tags.save()
+
+        # Testing instance
+
     def test_instance(self):
-        self.assertTrue(isinstance(self.new_editor,Editor))
-    
-    def test_save_editor(self):
-        self.new_editor.save()
-        length = Editor.objects.all()
-        self.assertTrue(len(length) > 0)   
+        self.assertTrue(isinstance(self.test_tags, tags))
 
-    def test_delete(self):
-        delete_editor = Editor.objects.filter(id=1)
-        delete_editor.delete()
-        new_editors = Editor.objects.all()
-        self.assertTrue(len(new_editors) == 0)   
+        # Testing Save method
 
-    def test_update(self):
-        self.new_editors.save()
-        self.update_editor = Editor.objects.filter(first_name='Jeanne').update(first_name = 'Jehanne')
-        self.updated_editor = Editor.objects.get(first_name='Jehanne')
-        self.assertTrue(self.updated_editor.first_name,'Jehanne')
-    
-class Articletest(TestCase):
-    def setUp(self):
-        self.editor1 =  Editor(first_name='Jeanne',last_name='Nyiramwiza',email='njoanc@gmail.com')
-        self.editor1.save()
-        self.new_article = Article(title='OMG',post='Here we are',editor=self.editor1)
-        self.new_article.save()
+    def test_save_method(self):
+        tags = tags.objects.create(name='funny')
+        tags = tags.objects.all()
+        self.assertTrue(len(tags) > 0)
 
-        self.new_tag = tags(name='testing')
-        self.new_tag.save()
-
-        self.new_article.tags.add(self.new_tag)
-
+    # Tear down method
     def tearDown(self):
-        Editor.objects.all().delete()
         tags.objects.all().delete()
-        Article.objects.all().delete()
+
+        # Testing delete method
+
+    def test_delete_tags(self):
+        self.test_tags.delete()
+        self.assertEqual(len(tags.objects.all()), 0)
+
+
+class LocationTestClass(TestCase):
+
+    #Set up method the test for location and instantiating the location object
+
+
+    def setUp(self):
+        self.test_location = Location(name = 'Nairobi')
+        self.test_location.save()
+
+    #Testing instance
 
     def test_instance(self):
-        self.assertTrue(isinstance(self.new_article,Article))
-    
-    def test_save_article(self):
-        self.editor1.save()
-        self.new_article.save()
-        length = Editor.objects.all()
-        self.assertTrue(len(length) > 0)   
 
-    def test_delete_article(self):
-        delete_article = Article.objects.filter(id=1)
-        delete_article.delete()
-        new_articles = Article.objects.all()
-        self.assertTrue(len(new_articles) == 0)   
+        self.assertTrue(isinstance(self.test_location, Location))
 
-    def test_update_article(self):
-        self.new_article.save()
-        self.update_article = Article.objects.filter(title='CNN').update(title = 'AirForceCrush')
-        self.updated_article = Article.objects.get(title='AirForceCrush')
-        self.assertTrue(self.updated_article.title,'AirForceCrush')
+    #Testing Save method
 
-    def test_get_news(self):
-        today_news = Article.todays_news()
-        self.assertTrue(len(today_news)>0)
+    def test_save_method(self):
+        locations = Location.objects.all()
+        self.assertTrue(len(locations)>0)
 
-    def test_get_news_by_date(self):
-        test_date = '2017-03-17'
-        date = dt.datetime.strptime(test_date, '%Y-%m-%d').date()
-        news_by_date = Article.days_news(date)
-        self.assertTrue(len(news_by_date) == 0)
+    # Tear down method
+    def tearDown(self):
+        Location.objects.all().delete()
+
+        # Testing delete method
+
+    def test_delete_location(self):
+        self.test_location.delete()
+        self.assertEqual(len(Location.objects.all()), 0)
+
+
+
+class ImageTestClass(TestCase):
+    # Set up method
+    def setUp(self):
+
+
+        self.nairobi = Location.objects.create(name="nairobi")
+        self.funny= tags.objects.create(name='funny')
+
+
+        self.test_image = Image.objects.create(image='imagesef',
+                                name='cat',
+                                description='This is a description',
+                                location=self.nairobi,
+                                )
+
+        self.test_image.save()
+
+    def test_save_method(self):
+        self.test_image.save()
+        test_images = Image.objects.all()
+        self.assertTrue(len(test_images) > 0)
+
+    # Testing save method
+    def test_save_image(self):
+        self.assertEqual(len(Image.objects.all()), 1)
+
+    # Tear down method
+    def tearDown(self):
+        Image.objects.all().delete()
+
+    def test_delete_image(self):
+        Image.delete_image_by_id(self.test_image.id)
+        self.assertEqual(len(Image.objects.all()), 0)
+
+
+
+class Review(TestCase):
+
+    def setUp(self):
+
+        self.melissa = User.objects.create(username="melissa")
+        self.picture = Image.objects.create(image='image1',
+                                            user=self.melissa)
+        self.comment = Review.objects.create(comment = 'nicephoto')
+
+        self.test_review = Review.objects.create(user=self.melissa,
+                                                 image=self.picture,
+                                                 comment='nice photo')
+        self.test_review.save()
+
+    #Testing instance
+
+    def test_instance(self):
+
+        self.assertTrue(isinstance(self.test_reviews, Review))
+
+    #Testing Save method
+
+    def test_save_method(self):
+        reviews = Review.objects.all()
+        self.assertTrue(len(reviews)>0)
+
+    def test_save_review(self):
+        self.assertEqual(len(Review.objects.all()), 1)
+
+    # Tear down method
+    def tearDown(self):
+        Review.objects.all().delete()
+
+        # Testing delete method
+
+    def test_delete_review(self):
+        self.test_review.delete()
+        self.assertEqual(len(Review.objects.all()), 0)
+
+
