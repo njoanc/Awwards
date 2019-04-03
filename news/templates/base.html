@@ -4,9 +4,9 @@
 
 <head>
   <meta charset="utf-8"> {% if title %}
-  <title> Image Gallery - {{title}}</title>
+  <title> Awwards - {{title}}</title>
   {% else %}
-  <title> The Image Gallery </title>
+  <title> The Awards App </title>
   {% endif %} {% block styles %} {% bootstrap_css %}
   <link rel="stylesheet" href="{% static 'css/styles.css' %}">
   <link href="https://fonts.googleapis.com/css?family=Grand+Hotel" rel="stylesheet">
@@ -19,7 +19,7 @@
 
 <body>
   {% include "navbar.html" %} {% block content %}
-  <h1 class='text-center'> Images for Today </h1> {%endblock%} {% block scripts %}
+  <h1 class='text-center'> Project for Today </h1> {%endblock%} {% block scripts %}
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
   {% bootstrap_javascript %} {% endblock %}

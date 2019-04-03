@@ -9,7 +9,7 @@
   <div class="jumbotron text-center mb-0" id="jumbo" style="background-color:rgb(203, 219, 113);">
 
     <h1 class="h1" style="font-family: 'Dosis', cursive; color:rgb(56, 148, 76);font-size:100px;">Awards</h1>
-    <p class="h1" style="font-family: 'Dosis', cursive; color:black;font-size:25px;">View projects, submit your own projects and have them reviewed.</p>
+    <p class="h1" style="font-family: 'Dosis', cursive; color:black;font-size:25px;"><strong>View projects, submit your own projects and have them reviewed.</strong></p>
   </div>
 </div>
 
@@ -19,14 +19,15 @@
   <div class="card-deck flex-wrap">
     {% for project in projects %}
     <div class="card border-secondary w-33"><a href="{% url 'project' project.id %}">
-
-      <img src="{{project.project_image.url}}" data-target="#imageModal{{project.id}}" data-toggle="modal" alt="" class="img-fluid" id="eachimage1" size="100px200"></a>
-      <p style="font-family: 'Dosis', sans-serif; text-align:center;"> {{ project.description}}</p>
-      <p style="font-family: 'Dosis', sans-serif; text-align:center;"> {{ project.user.username}}</p>
-      <span class="badge badge-pill badge-info" style="font-family: 'Dosis', sans-serif;">
-      <a href="{{ project.project_url}}">Visit Site</a></span>
-      <span class="badge badge-pill badge-danger" style="font-family: 'Dosis', sans-serif; text-align:center;">Like</span>
-      <span class="badge badge-pill badge-warning" style="font-family: 'Dosis', sans-serif; text-align:center;"><a href="{% url 'project' project.id %}">View Project</a></span>
+      <div class="col-sm-12" style="background-color:rgb(227, 228, 236);">
+        <p style="font-family: 'Dosis', sans-serif; text-align:center;"> {{ project.title}}</p>
+      </div>
+        <img src="{{project.project_image.url}}" data-target="#imageModal{{project.id}}" data-toggle="modal" alt="" class="img-fluid" id="eachimage1" size="100px200"></a>
+        <p style="font-family: 'Dosis', sans-serif; text-align:center;"> {{ project.description}}</p>
+        <p style="font-family: 'Dosis', sans-serif; text-align:center;"> {{ project.user}}</p>
+        <span class="badge badge-pill badge-info" style="font-family: 'Dosis', sans-serif;"><a href="{{ project.project_url}}">Visit Site</a></span>
+        <span class="badge badge-pill badge-danger" style="font-family: 'Dosis', sans-serif; text-align:center;">Like</span>
+        <span class="badge badge-pill badge-warning" style="font-family: 'Dosis', sans-serif; text-align:center;"><a href="{% url 'project' project.id %}">View Project</a></span>
 
     </div>
     {% endfor %}
@@ -35,7 +36,7 @@
 
 </div>
 
-<div class="jumbotron text-center mt-3" style="background-color:rgba(216, 123, 216, 0.479);font-family: 'Dosis', sans-serif;">
+<div class="jumbotron text-center mt-3" style="background-color:rgba(226, 209, 226, 0.479);font-family: 'Dosis', sans-serif;">
 
   <form action="{%url 'homePage'%}" method="post">
     {%csrf_token%} {% bootstrap_form letterForm %}
@@ -48,9 +49,7 @@
 <div class="container">
   <div class="col-md-12">
     <div class="footer text-center">
-      <ul id="footer1">
-        <li style="font-size:20px;"> <strong>© jehanne2019</strong></li>
-      </ul>
+      <p style="font-size:20px;"> <strong>© jehanne2019</strong></p>
     </div>
   </div>
 </div>

@@ -26,9 +26,8 @@
       <div class="card-columns">
 
         {% for project in projects %}
-        <div class="card border-secondary">
-          <img src="{{project.project_image.url}}" data-target="#imageModal{{project.id}}" data-toggle="modal" alt="" class="img-fluid" id="eachimage"
-            size="100px200">
+        <div class="col-sm-6 col-md-12">
+            <h1>{{image.image_name}}</h1>
         </div>
         {% endfor %}
       </div>

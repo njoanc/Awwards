@@ -35,6 +35,7 @@ class Location(models.Model):
 
 class Project(models.Model):
     title = models.TextField(max_length=200, null=True, blank=True, default="title")
+    user=models.OneToOneField(User, on_delete=models.CASCADE, null=True, related_name="project")
     project_image = models.ImageField(upload_to='picture/', null=True, blank=True)
     description = models.TextField()
     project_url=models.URLField(max_length=250)
