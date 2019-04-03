@@ -23,6 +23,6 @@ urlpatterns = [
     url(r'',include('news.urls')),
     url(r'^logout/$', views.logout, {"next_page": '/'}),
     url(r'^tinymce/', include('tinymce.urls')),
-    url(r'^accounts/', include('registration.backends.hmac.urls')),
+    url(r'^accounts/', include('registration.backends.default.urls')),
     url(r'^api-token-auth/', obtain_auth_token)
 ]

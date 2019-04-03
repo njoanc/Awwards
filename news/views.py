@@ -14,6 +14,7 @@ from rest_framework.views import APIView
 from .serializer import ProjectSerializer, ProfileSerializer
 from rest_framework import status
 from .permissions import IsAdminOrReadOnly
+from django.conf import settings
 
 
 
@@ -73,8 +74,6 @@ def project(request, id):
 
     else:
         form = ReviewForm()
-
-        # return HttpResponseRedirect(reverse('image', args=(image.id,)))
 
     return render(request, 'image.html', {"project": project,
                                           'form':form,
@@ -138,7 +137,7 @@ def edit_profile(request):
     return render(request, 'registration/edit_profile.html', {"form": form})
 
 @login_required(login_url='/accounts/login/')
-def individual_profile_page(request, username=None):
+def profile(request, username=None):
     if not username:
         username = request.user.username
     # images by user id
@@ -177,7 +176,7 @@ def search_image(request):
 
 
 @login_required(login_url='/accounts/login/')
-def individual_profile_page(request, username):
+def profile(request, username):
     print(username)
     if not username:
         username = request.user.username
@@ -189,7 +188,6 @@ def individual_profile_page(request, username):
     latest_review_list = Review.objects.filter(user_id=username).filter(user_id=username)
     context = {'latest_review_list': latest_review_list}
     if userf:
-        print('user found')
         profile = Profile.objects.get(user=userf)
     else:
         print('No suchuser')

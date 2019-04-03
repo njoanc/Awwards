@@ -1,12 +1,9 @@
 from __future__ import unicode_literals
-import numpy as np
+# import numpy as np
 from django.db.models.signals import post_save
 from django.db.models import Avg, Max, Min
-
 from django.db import models
 from django.contrib.auth.models import User
-
-# Create your models here.
 import datetime as dt
 
 class tags(models.Model):
@@ -95,7 +92,7 @@ class Profile(models.Model):
     profile_pic = models.ImageField(upload_to='picture/', null=True, blank=True, default= 0)
     user=models.OneToOneField(User, on_delete=models.CASCADE, null=True, related_name="profile")
     project=models.ForeignKey(Project, null=True)
-    contact=models.IntegerField(default=0)
+    contact=models.TextField(max_length=200, null=True, blank=True, default="email")
 
     def create_user_profile(sender, instance, created, **kwargs):
         if created:
