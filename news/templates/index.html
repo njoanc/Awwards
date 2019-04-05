@@ -26,11 +26,11 @@
         <p style="font-family: 'Dosis', sans-serif; text-align:center;"> {{ project.description}}</p>
         <p style="font-family: 'Dosis', sans-serif; text-align:center;"> {{ project.user}}</p>
         <span class="badge badge-pill badge-info"  style="background-color:rgb(16, 17, 14);font-size:50px;"><a href="{{ project.project_url}}"><strong></strong>Visit Site</strong></a></span>
-        <!-- <span class="badge badge-pill badge-danger" style="background-color:rgba(56, 233, 224, 0.267);">Like</span>
-        <span class="badge badge-pill badge-warning" style="background-color:rgba(7, 219, 95, 0.952);"><a href="{% url 'project' project.id %}"><strong>View Project</strong></a></span> -->
+        <span class="badge badge-pill badge-danger" style="background-color:rgba(56, 233, 224, 0.267);font-size:10px;">Like</span>
+        <span class="badge badge-pill badge-warning" style="background-color:rgba(7, 219, 95, 0.952);font-size:10px;""><a href="{% url 'project' project.id %}"><strong>Vote</strong></a></span>
         <!-- <p style="font-family: 'Dosis', sans-serif; text-align:center;"> {{ project.profile}}</p> -->
-
-    </div>
+        <!-- <button onclick="window.location.href='/image.html'">Vote</button> -->
+        
     {% endfor %}
   </div>
 

@@ -22,8 +22,7 @@ urlpatterns = [
     url(r'api/profile/profile-id/(?P<pk>[0-9]+)/$',
         views.ProfileDescription.as_view()),
     url(r'^$', views.review_list, name='review_list'),
-    url(r'^review/(?P<review_id>[0-9]+)/$',
-        views.review_detail, name='review_detail'),
+    url(r'^review/(?P<review_id>[0-9]+)/$',views.review_detail, name='review_detail'),
     url(r'^project$', views.project_list, name='project_list'),
 ]
 

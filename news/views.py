@@ -126,7 +126,7 @@ def edit_profile(request):
         if form.is_valid():
             profile_pic = form.save(commit=False)
             profile_pic.user = current_user
-            # profile_pic.save()
+            profile_pic.save()
         return redirect('homePage')
 
     else:
@@ -138,6 +138,10 @@ def profile(request, username=None):
     if not username:
         username = request.user.username
     # images by user id
+    image = Profile.objects.all()
+    pro=None
+    for img in image:
+        print(img)
     profile = Profile.objects.filter(user_id=username)
 
     return render (request, 'registration/user_image_list.html', {'profile':profile, 'username': username})
