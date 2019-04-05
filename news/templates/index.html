@@ -8,7 +8,7 @@
 
   <div class="jumbotron text-center mb-0" id="jumbo" style="background-color:rgb(203, 219, 113);">
 
-    <h1 class="h1" style="font-family: 'Dosis', cursive; color:rgb(56, 148, 76);font-size:100px;">Awards</h1>
+    <h1 class="h1" style="font-family: 'Dosis', cursive; color:rgb(56, 148, 76);font-size:20px;">Awards</h1>
     <p class="h1" style="font-family: 'Dosis', cursive; color:black;font-size:25px;"><strong>View projects, submit your own projects and have them reviewed.</strong></p>
   </div>
 </div>
@@ -23,11 +23,11 @@
         <p style="font-family: 'Dosis', sans-serif; text-align:center;"> {{ project.title}}</p>
       </div>
         <img src="{{project.project_pic.url}}" data-target="#projectModal{{project.id}}" data-toggle="modal" alt="" class="img-fluid" id="eachproject" size="100px200"></a>
-        <p style="font-family: 'Dosis', sans-serif; text-align:center;"> {{ project.description}}</p>
-        <p style="font-family: 'Dosis', sans-serif; text-align:center;"> {{ project.user}}</p>
-        <span class="badge badge-pill badge-info"  style="background-color:rgb(16, 17, 14);font-size:50px;"><a href="{{ project.project_url}}"><strong></strong>Visit Site</strong></a></span>
-        <span class="badge badge-pill badge-danger" style="background-color:rgba(56, 233, 224, 0.267);font-size:10px;">Like</span>
-        <span class="badge badge-pill badge-warning" style="background-color:rgba(7, 219, 95, 0.952);font-size:10px;""><a href="{% url 'project' project.id %}"><strong>Vote</strong></a></span>
+        <p style="font-family: 'Dosis', sans-serif; text-align:center;"> <strong>Description:{{ project.description}}</strong> </p>
+        <p style="font-family: 'Dosis', sans-serif; text-align:center;"> <strong>User:{{ project.user}}</strong> </p>
+        <span class="badge badge-pill badge-info"  style="background-color:rgb(243, 245, 239);font-size:20px;"><a href="{{ project.project_url}}"><strong></strong>Visit Site</strong></a></span>
+        <span class="badge badge-pill badge-danger" style="background-color:rgba(147, 216, 207, 0.267);font-size:20px;">Like</span>
+        <span class="badge badge-pill badge-warning" style="background-color:rgba(19, 18, 19, 0.027);font-size:20px;"><a href="{% url 'project' project.id %}"><strong>Vote</strong></a></span>
         <!-- <p style="font-family: 'Dosis', sans-serif; text-align:center;"> {{ project.profile}}</p> -->
         <!-- <button onclick="window.location.href='/image.html'">Vote</button> -->
         
