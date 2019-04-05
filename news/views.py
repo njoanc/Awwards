@@ -43,7 +43,8 @@ def home_projects (request):
             HttpResponseRedirect('home_projects')
 
     return render(request, 'index.html', {'projects':projects, 'letterForm':form})
-
+    
+@login_required(login_url='/accounts/login/')
 def project(request, id):
 
     try:
