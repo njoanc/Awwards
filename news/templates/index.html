@@ -18,16 +18,17 @@
 
   <div class="card-deck flex-wrap">
     {% for project in projects %}
-    <div class="card border-secondary w-33"><a href="{% url 'project' project.id %}">
+    <div class="card border-secondary w-33" style="background-color:rgb(227, 228, 236);"><a href="{% url 'project' project.id %}">
       <div class="col-sm-12" style="background-color:rgb(227, 228, 236);">
         <p style="font-family: 'Dosis', sans-serif; text-align:center;"> {{ project.title}}</p>
       </div>
         <img src="{{project.project_pic.url}}" data-target="#projectModal{{project.id}}" data-toggle="modal" alt="" class="img-fluid" id="eachproject" size="100px200"></a>
         <p style="font-family: 'Dosis', sans-serif; text-align:center;"> {{ project.description}}</p>
         <p style="font-family: 'Dosis', sans-serif; text-align:center;"> {{ project.user}}</p>
-        <span class="badge badge-pill badge-info" style="font-family: 'Dosis', sans-serif;"><a href="{{ project.project_url}}">Visit Site</a></span>
-        <span class="badge badge-pill badge-danger" style="font-family: 'Dosis', sans-serif; text-align:center;">Like</span>
-        <span class="badge badge-pill badge-warning" style="font-family: 'Dosis', sans-serif; text-align:center;"><a href="{% url 'project' project.id %}">View Project</a></span>
+        <span class="badge badge-pill badge-info"  style="background-color:rgb(16, 17, 14);font-size:50px;"><a href="{{ project.project_url}}"><strong></strong>Visit Site</strong></a></span>
+        <!-- <span class="badge badge-pill badge-danger" style="background-color:rgba(56, 233, 224, 0.267);">Like</span>
+        <span class="badge badge-pill badge-warning" style="background-color:rgba(7, 219, 95, 0.952);"><a href="{% url 'project' project.id %}"><strong>View Project</strong></a></span> -->
+        <!-- <p style="font-family: 'Dosis', sans-serif; text-align:center;"> {{ project.profile}}</p> -->
 
     </div>
     {% endfor %}

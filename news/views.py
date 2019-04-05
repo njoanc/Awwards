@@ -138,9 +138,9 @@ def profile(request, username=None):
     if not username:
         username = request.user.username
     # images by user id
-    images = Image.objects.filter(user_id=username)
+    profile = Profile.objects.filter(user_id=username)
 
-    return render (request, 'registration/user_image_list.html', {'project_pic':project_pic, 'username': username})
+    return render (request, 'registration/user_image_list.html', {'profile':profile, 'username': username})
 
 def search_projects(request):
 
