@@ -1,12 +1,12 @@
-from .models import Image, Review, Profile, Project
+from .models import Review, Profile, Project
 from django import forms
 from django.forms import ModelForm, Textarea, IntegerField
 
 
-class NewImageForm(forms.ModelForm):
-    class Meta:
-        model = Image
-        exclude = ['user',]
+# class NewImageForm(forms.ModelForm):
+#     class Meta:
+#         model = Image
+#         exclude = ['user',]
 
 
 class NewProjectForm(forms.ModelForm):

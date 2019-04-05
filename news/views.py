@@ -1,11 +1,11 @@
 from __future__ import unicode_literals
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Image,Location,tags, Profile, Review, NewsLetterRecipients, Like, Project
+from .models import Location,tags, Profile, Review, NewsLetterRecipients, Like, Project
 from django.http  import HttpResponse, Http404, HttpResponseRedirect, JsonResponse
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
-from .forms import NewImageForm, UpdatebioForm, ReviewForm, NewProjectForm
+from .forms import UpdatebioForm, ReviewForm, NewProjectForm
 from .email import send_welcome_email
 from .forms import NewsLetterForm
 from rest_framework import generics
@@ -157,12 +157,12 @@ def search_projects(request):
         return render(request, 'search.html', {"message": message})
 
 # Search for an image
-def search_image(request):
+def search_project(request):
 
         # search for an image by the description of the image
-        if 'image' in request.GET and request.GET["image"]:
-            search_term = request.GET.get("image")
-            searched_images = Image.search_image(search_term)
+        if 'project' in request.GET and request.GET["project"]:
+            search_term = request.GET.get("project")
+            searched_images = Project.search_title(search_term)
             message = f"{search_term}"
 
             return render(request, 'search.html', {"message": message, "pictures": searched_images})
@@ -174,25 +174,21 @@ def search_image(request):
 
 @login_required(login_url='/accounts/login/')
 def profile(request, username):
-    print(username)
+    
     if not username:
         username = request.user.username
     # images by user id
-    images = Image.objects.filter(user_id=username)
+    projects= Projects.objects.filter(user_id=username)
     user = request.user
-    # profile = Profile.objects.get(user=user)
+    profile = Profile.objects.get(user=user)
     userf = User.objects.get(pk=username)
     latest_review_list = Review.objects.filter(user_id=username).filter(user_id=username)
     context = {'latest_review_list': latest_review_list}
     if userf:
-        print('user found')
-        # profile = Profile.objects.get(user=userf)
+        
+        profile = Profile.objects.get(user=userf)
     else:
-        print('No suchuser')
-    return render (request, 'registration/user_image_list.html', context, {'images':images,
-                                                                  'profile':profile,
-                                                                #   'user':user,
-                                                                  'username': username})
+        return render(request, 'registration/user_image_list.html', context, {'images':images,'profile':profile,'user':user,'username': username})
 def review_list(request):
     latest_review_list = Review.objects.all()
     context = {'latest_review_list':latest_review_list}

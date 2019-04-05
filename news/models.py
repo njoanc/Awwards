@@ -36,7 +36,7 @@ class Location(models.Model):
 class Project(models.Model):
     title = models.TextField(max_length=200, null=True, blank=True, default="title")
     user=models.OneToOneField(User, on_delete=models.CASCADE, null=True, related_name="project")
-    project_image = models.ImageField(upload_to='picture/', null=True, blank=True)
+    project_pic = models.ImageField(upload_to='picture/', null=True, blank=True)
     description = models.TextField()
     project_url=models.URLField(max_length=250)
 
@@ -114,13 +114,13 @@ class Profile(models.Model):
         profiles = cls.objects.filter(user__username__icontains=search_term)
         return profiles
 
-    @property
-    def image_url(self):
-        if self.profile_pic and hasattr(self.profile_pic, 'url'):
-            return self.profile_pic.url
+    # @property
+    # def image_url(self):
+    #     if self.profile_pic and hasattr(self.profile_pic, 'url'):
+    #         return self.profile_pic.url
 
-    def __str__(self):
-        return self.user.username
+    # def __str__(self):
+    #     return self.user.username
 
 
 class Image(models.Model):
@@ -133,46 +133,46 @@ class Image(models.Model):
     likes = models.IntegerField(default=0)
     comments= models.TextField(blank=True)
 
-    def __str__(self):
-        return self.name
+#     def __str__(self):
+#         return self.name
 
-    def save_image(self):
-        self.save()
+#     def save_image(self):
+#         self.save()
 
-    @classmethod
-    def delete_image_by_id(cls, id):
-        pictures = cls.objects.filter(pk=id)
-        pictures.delete()
+#     @classmethod
+#     def delete_image_by_id(cls, id):
+#         pictures = cls.objects.filter(pk=id)
+#         pictures.delete()
 
-    @classmethod
-    def get_image_by_id(cls, id):
-        pictures = cls.objects.get(pk=id)
-        return pictures
+#     @classmethod
+#     def get_image_by_id(cls, id):
+#         pictures = cls.objects.get(pk=id)
+#         return pictures
 
-    @classmethod
-    def filter_by_tag(cls, tags):
-        pictures = cls.objects.filter(tags=tags)
-        return pictures
+#     @classmethod
+#     def filter_by_tag(cls, tags):
+#         pictures = cls.objects.filter(tags=tags)
+#         return pictures
 
-    @classmethod
-    def filter_by_location(cls, location):
-        pictures = cls.objects.filter(location=location)
-        return pictures
+#     @classmethod
+#     def filter_by_location(cls, location):
+#         pictures = cls.objects.filter(location=location)
+#         return pictures
 
-    @classmethod
-    def search_image(cls, search_term):
-        pictures = cls.objects.filter(name__icontains=search_term)
-        return pictures
+#     @classmethod
+#     def search_image(cls, search_term):
+#         pictures = cls.objects.filter(name__icontains=search_term)
+#         return pictures
 
-    @classmethod
-    def update_image(cls, id):
-        pictures=cls.objects.filter(id=id).update(id=id)
-        return pictures
+#     @classmethod
+#     def update_image(cls, id):
+#         pictures=cls.objects.filter(id=id).update(id=id)
+#         return pictures
 
-    @classmethod
-    def update_description(cls, id):
-        pictures = cls.objects.filter(id=id).update(id=id)
-        return pictures
+#     @classmethod
+#     def update_description(cls, id):
+#         pictures = cls.objects.filter(id=id).update(id=id)
+#         return pictures
 
 
 class Review(models.Model):
