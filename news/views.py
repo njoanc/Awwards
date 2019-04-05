@@ -124,23 +124,23 @@ def edit_profile(request):
         form = UpdatebioForm(request.POST, request.FILES)
         print(form.is_valid())
         if form.is_valid():
-            image = form.save(commit=False)
-            image.user = current_user
-            image.save()
+            profile_pic = form.save(commit=False)
+            profile_pic.user = current_user
+            # profile_pic.save()
         return redirect('homePage')
 
     else:
         form = UpdatebioForm()
     return render(request, 'registration/edit_profile.html', {"form": form})
 
-# @login_required(login_url='/accounts/login/')
-# def profile(request, username=None):
-#     if not username:
-#         username = request.user.username
-#     # images by user id
-#     images = Image.objects.filter(user_id=username)
+@login_required(login_url='/accounts/login/')
+def profile(request, username=None):
+    if not username:
+        username = request.user.username
+    # images by user id
+    images = Image.objects.filter(user_id=username)
 
-#     return render (request, 'registration/user_image_list.html', {'images':images, 'username': username})
+    return render (request, 'registration/user_image_list.html', {'project_pic':project_pic, 'username': username})
 
 def search_projects(request):
 
@@ -172,23 +172,25 @@ def search_project(request):
             return render(request, 'search.html', {"message": message})
 
 
-@login_required(login_url='/accounts/login/')
-def profile(request, username):
+# @login_required(login_url='/accounts/login/')
+# def profile(request, username):
     
-    if not username:
-        username = request.user.username
-    # images by user id
-    projects= Projects.objects.filter(user_id=username)
-    user = request.user
-    profile = Profile.objects.get(user=user)
-    userf = User.objects.get(pk=username)
-    latest_review_list = Review.objects.filter(user_id=username).filter(user_id=username)
-    context = {'latest_review_list': latest_review_list}
-    if userf:
+#     if not username:
+#         username = request.user.username
+#     # images by user id
+#     projects= Project.objects.filter(user_id=username)
+#     user = request.user
+#     profile = Profile.objects.get(user=user)
+#     userf = User.objects.get(pk=username)
+#     latest_review_list = Review.objects.filter(user_id=username).filter(user_id=username)
+#     context = {'latest_review_list': latest_review_list}
+#     if userf:
         
-        profile = Profile.objects.get(user=userf)
-    else:
-        return render(request, 'registration/user_image_list.html', context, {'images':images,'profile':profile,'user':user,'username': username})
+#         profile = Profile.objects.get(user=userf)
+
+#         return render(request, 'registration/user_image_list.html', context, {'project_pic':project_pic,'profile':profile,'user':user,'username': username})
+#     else:
+#         return render(request, 'registration/user_image_list.html', context, {'project_pic':roject_pic,'profile':profile,'user':user,'username': username})
 def review_list(request):
     latest_review_list = Review.objects.all()
     context = {'latest_review_list':latest_review_list}
