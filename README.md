@@ -1,5 +1,4 @@
 # Awwards
-Introduction
 The application will allow a user to post a project he/she has created and get it reviewed by his/her peers.
 # Purpose
 The purpose of this Independent Project is to demonstrate your level of understanding of the various concepts that you have covered in the content throughout the week. The project will be graded by your peers and will determine if you are eligible to move on to the next module. All the requirements provided below should be met in a high quality manner.
